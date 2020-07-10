@@ -1,0 +1,1 @@
+This code is cloned from [this tutorial article](https://qvault.io/2019/12/03/building-a-music-video-streaming-app-in-go-using-hls/)
