@@ -1,12 +1,12 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
-	"log"
+    "fmt"
+    "io/ioutil"
+    "log"
 
     "github.com/baconYao/go-library/protobuf/src/simple"
-	"github.com/golang/protobuf/proto"
+    "github.com/golang/protobuf/proto"
 )
 
 func main() {
@@ -22,19 +22,19 @@ func readAndWriteDemo(sm proto.Message) {
 }
 
 func wtireToFile(fname string, pb proto.Message) error {
-	out, err := proto.Marshal(pb)
-	if err != nil {
-		log.Fatalln("Can't serialise to bytes", err)
-		return err
+    out, err := proto.Marshal(pb)
+    if err != nil {
+        log.Fatalln("Can't serialise to bytes", err)
+        return err
+    }
+
+    if err := ioutil.WriteFile(fname, out, 0644); err != nil {
+        log.Fatalln("Can't write to file", err)
+        return err
 	}
 
-	if err := ioutil.WriteFile(fname, out, 0644); err != nil {
-		log.Fatalln("Can't write to file", err)
-		return err
-	}
-
-	fmt.Println("Data has been written!")
-	return nil
+    fmt.Println("Data has been written!")
+    return nil
 }
 
 func readFromFile(fname string, pb proto.Message) error {
@@ -50,22 +50,22 @@ func readFromFile(fname string, pb proto.Message) error {
         return err2
     }
 
-	fmt.Println("Data has been read!")
-	return nil
+    fmt.Println("Data has been read!")
+    return nil
 }
 
 func doSimple() *simplepb.SimpleMessage {
-	sm := simplepb.SimpleMessage{
-		Id:         12345,
-		IsSimple:   true,
-		Name:       "Bacon yao is my name",
-		SampleList: []int32{1, 3, 5, 7},
-	}
-	fmt.Println(sm)
+    sm := simplepb.SimpleMessage{
+        Id:         12345,
+        IsSimple:   true,
+        Name:       "Bacon yao is my name",
+        SampleList: []int32{1, 3, 5, 7},
+    }
+    fmt.Println(sm)
 
-	sm.Name = "I renamed you"
-	fmt.Println(sm)
-	fmt.Println("The ID is: ", sm.GetId())
+    sm.Name = "I renamed you"
+    fmt.Println(sm)
+    fmt.Println("The ID is: ", sm.GetId())
 
-	return &sm
+    return &sm
 }
