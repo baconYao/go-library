@@ -7,6 +7,7 @@ import (
 
     "github.com/baconYao/go-library/protobuf/src/simple"
     "github.com/baconYao/go-library/protobuf/src/enum"
+    "github.com/baconYao/go-library/protobuf/src/complex"
     "github.com/golang/protobuf/proto"
     "github.com/golang/protobuf/jsonpb"
 )
@@ -18,6 +19,29 @@ func main() {
     jsonDemon(sm)
 
     doEnum()
+    doComplex()
+}
+
+func doComplex() {
+    fmt.Println("=== doComplex ===")
+    cm := complexpb.ComplexMessage{
+        OneDummy: &complexpb.DummyMessage{
+            Id: 1,
+            Name: "First message",
+        },
+        MultipleDummy: []*complexpb.DummyMessage{
+            &complexpb.DummyMessage{
+                Id: 2,
+                Name: "Second message",
+            },
+            &complexpb.DummyMessage{
+                Id: 3,
+                Name: "Third message",
+            },
+        },
+    }
+
+    fmt.Println(cm)
 }
 
 func doEnum() {

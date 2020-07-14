@@ -6,3 +6,5 @@
 protoc -I src/ --go_out=src/ src/simple/simple.proto
 # 最後會產生 src/enum/enum.pb.go
 protoc -I src/ --go_out=src/ src/enum/enum.proto
+# 最後會產生 src/complex/complex.pb.go
+protoc -I src/ --go_out=src/ src/complex/complex.proto
