@@ -6,6 +6,7 @@ import (
     "log"
 
     "github.com/baconYao/go-library/protobuf/src/simple"
+    "github.com/baconYao/go-library/protobuf/src/enum"
     "github.com/golang/protobuf/proto"
     "github.com/golang/protobuf/jsonpb"
 )
@@ -15,6 +16,21 @@ func main() {
     readAndWriteDemo(sm)
     
     jsonDemon(sm)
+
+    doEnum()
+}
+
+func doEnum() {
+    fmt.Println("=== doEnum ===")
+    em := enumpb.EnumMessage{
+        Id: 168,
+        DayOfTheWeek: enumpb.DayOfTheWeek_WEDNESDAY,
+    }
+
+    fmt.Println(em)
+    em.DayOfTheWeek = enumpb.DayOfTheWeek_SUNDAY
+    fmt.Println(em)
+
 }
 
 func jsonDemon(sm proto.Message) {
