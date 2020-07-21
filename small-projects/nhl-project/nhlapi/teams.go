@@ -52,7 +52,7 @@ type nhlTeamsResponse struct {
 	Teams []Team `json:"teams"`
 }
 
-// GetAllTeams aa
+// GetAllTeams method
 func GetAllTeams() ([]Team, error) {
 	res, err := http.Get(fmt.Sprintf("%s/teams", baseURL))
 	if err != nil {

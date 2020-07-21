@@ -6,11 +6,12 @@ This is cloned from [Learn Go by building small projects - P01E01 Fetch External
 
 `go run main.go`
 
-After execution, the output will stdout to `console` and a file called `resters.txt`.
+After execution, the output will stdout to `console` and a file called `rosters.txt`.
 
-At the bottom of output, you can see the `total time` required to get the result from NHL API
+At the bottom of output, you can see the `total time` required to get the result from NHL API.
 
 ## Resources
 
 * [Github Repo Part - 1](https://github.com/EQuimper/youtube-golang-nhl-project/tree/part-1)
+* [Github Repo Part - 2](https://github.com/EQuimper/youtube-golang-nhl-project/tree/part-2)
 * [NHL API](https://statsapi.web.nhl.com/api/v1/teams)
