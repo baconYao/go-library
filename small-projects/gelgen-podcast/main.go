@@ -1,42 +1,29 @@
 package main
 
 import (
-	"fmt"
-	"gelgen-podcasr/feeds"
-	"gelgen-podcasr/itunes"
+	"gelgen-podcasr/graph"
+	"gelgen-podcasr/graph/generated"
 	"log"
+	"net/http"
+	"os"
+
+	"github.com/99designs/gqlgen/graphql/handler"
+	"github.com/99designs/gqlgen/graphql/playground"
 )
 
+const defaultPort = "8080"
+
 func main() {
-	fmt.Println("Init....")
-	ias := itunes.NewItunesAPIServices()
-
-	// 搜尋 itunes 上名為 Full Stacj Radio 的 podcast 資訊
-	// res, err := ias.Search("Full Stack Radio")
-	res, err := ias.Search("Full Stack Radio")
-	if err != nil {
-		log.Fatal("Error while serching: %v", err)
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = defaultPort
 	}
 
-	for _, item := range res.Results {
-		log.Println("---------------------")
-		log.Printf("Artist: %s", item.ArtistName)
-		log.Printf("Podcast Name: %s", item.TrackName)
-		log.Printf("Feed URL: %s", item.FeedURL)
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 
-		// 透過 feed URL 取得一集的 podcast 資訊
-		feed, err := feeds.GetFeed(item.FeedURL)
-		if err != nil {
-			log.Fatal("Error while getting feed: %v", err)
-		}
+	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
+	http.Handle("/query", srv)
 
-		for _, pod := range feed.Channel.Item {
-			log.Println("###############")
-			log.Printf("Title: %s", pod.Title)
-			log.Printf("Duration: %s", pod.Duration)
-			log.Printf("Description: %s", pod.Description)
-			log.Printf("URL: %s", pod.Enclosure.URL)
-		}
-		log.Println("---------------------")
-	}
+	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
+	log.Fatal(http.ListenAndServe(":"+port, nil))
 }
