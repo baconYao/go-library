@@ -6,6 +6,31 @@ This is cloned from [Learn Go by building small projects - P02 GraphQL itunes po
 
 `go run main.go`
 
+This will launch the GraphQL ground at localhost:8080
+
+## Query in GraphQL playground
+
+```
+query my_search{
+  search(
+    term:"Full Stack Radio"
+  ) {
+    artist
+    podcastName
+    episodesCount
+    feedUrl
+  }
+}
+
+query get_feed{
+  feed(
+    feedUrl: "https://feeds.simplecast.com/Gd37VcDw"
+  ) {
+    title
+  }
+}
+```
+
 ## Resources
 
 * [iTunes Search API](https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/)
