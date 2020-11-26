@@ -6,7 +6,7 @@ This is cloned from [Learn Go by building small projects - P02 GraphQL itunes po
 
 `go run main.go`
 
-This will launch the GraphQL ground at localhost:8080
+This will launch the GraphQL playground at localhost:8080
 
 ## Query in GraphQL playground
 
